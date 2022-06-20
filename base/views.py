@@ -9,5 +9,5 @@ def room(request,pk):
     rooms = [{'id':1,'name': 'Learn Pthon'},
                         {'id':2,'name': 'Learn Java'},
                         {'id':3,'name': 'Learn C++'},]
-    
+    #59.58s done
     return render(request, 'base/room.html',{'rooms':rooms})
