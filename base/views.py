@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect
 
 from base.forms import RoomForm
-from .models import Room
+from .models import Room,Topic
 
 #rooms = [{'id': 1, 'name': 'Learn Python'},
 #        {'id': 2, 'name': 'Learn Java'},
@@ -14,7 +14,8 @@ from .models import Room
 
 def home(request):
     rooms = Room.objects.all()
-    context = {'rooms': rooms}
+    topics = Topic.objects.all()
+    context = {'rooms': rooms,'topics':topics}
     return render(request, 'base/home.html', context)
 
 
