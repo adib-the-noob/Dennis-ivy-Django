@@ -2,9 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
+from  django.contrib.auth import authenticate,login,logout
 from django.db.models import Q
 from base.forms import RoomForm
 from .models import Room,Topic
+
 
 #rooms = [{'id': 1, 'name': 'Learn Python'},
 #        {'id': 2, 'name': 'Learn Java'},
@@ -22,6 +24,13 @@ def loginPage(request):
         except:
             messages.error(request, 'User Does Not Exist!')
         
+        user  = authenticate(request, username=username, password=password)      
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Username of Password Does not exist!')
+
     context = {}
     return render(request,'base/login_register.html',context)
 
