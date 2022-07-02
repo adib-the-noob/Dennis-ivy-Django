@@ -1,4 +1,3 @@
-from email import message
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
@@ -74,7 +73,8 @@ def home(request):
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
-    context = {'room': room}
+    room_messages = room.message_set.all()
+    context = {'room': room,'room_messages': room_messages}
     return render(request, 'base/room.html', context)
 
 
